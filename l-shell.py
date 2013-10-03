@@ -1,15 +1,15 @@
 from collections import deque
 import pygraphviz as pgv;
 
-G = pgv.AGraph("l-shell.dot")
+G = pgv.AGraph("karate.dot")
 
 old_degree = 1
 
 # Higher values of alpha result in smaller communities.
 # If Alpha > degree of starting vertex, the algorithm fails.
 # Lower values of alpha result in larger communities.
-alpha = float(.1)
-v = G.get_node("1") # starting vertex.
+alpha = float(4)
+v = G.get_node("3") # starting vertex.
 
 community = []
 shell = [v]
@@ -82,4 +82,6 @@ while len(shell) > 0:
 			break
 # If we haven't reached the point where this shell isn't a shell, 
 
+
+print len (community), " nodes in community, of ", len (G.get_nodes)
 print G.subgraph(community)

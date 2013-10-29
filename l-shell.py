@@ -9,7 +9,7 @@ old_degree = 1
 # If Alpha > degree of starting vertex, the algorithm fails.
 # Lower values of alpha result in larger communities.
 alpha = float(1.9)
-v = G.get_node("17") # starting vertex.
+v = G.get_node("24") # starting vertex.
 
 # The detected community.
 community = []
@@ -40,18 +40,12 @@ while len(shell) > 0:
 # The total emerging degree is the sum of emerging degrees (defined as
 # the number of vertices from the current shell to unvisited
 # nodes).
-	print j, " has neighbors ", neighbors , " compare to ", community
+	external_vertices = []
 	
 	for member in neighbors:
-		if to_append_to_community.count (member) > 0:
-			neighbors.remove (member)
-		elif community.count (member) > 0:
-			neighbors.remove(member)
-		elif shell.count(member) > 0:
-			neighbors.remove(member)
-	print j, " now has neighbors ", neighbors , " compare to ", community
-	
-	external_vertices = neighbors
+		if to_append_to_community.count (member) == 0 and community.count (member) == 0 and shell.count(member) == 0:
+			external_vertices.append (member)
+#			print "Appending ", member	
 
 # Current shell members can be neighbors, as long as we haven't visited them.
 # Current shell members shouldn't be added to the next shell.
@@ -60,6 +54,7 @@ while len(shell) > 0:
 # may have duplicate entries.
 	for member in external_vertices:
 		if next_shell.count(member) == 0:
+			print "appending ", member
 			next_shell.append(member)
 			
 # Append all of the outward facing vertices
@@ -69,7 +64,7 @@ while len(shell) > 0:
 	if len(shell) == 0:
 		print depth, " completed."
 		print total_emerging_degree
-		print next_shell
+		print "next shell is: ",next_shell
 		depth = depth +1
 		shell = next_shell
 		next_shell = []

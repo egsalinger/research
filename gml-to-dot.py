@@ -24,20 +24,24 @@ def main (argv):
 
 
  with open (inputfile) as file:
-	source = ""
-	target = ""
+	source = -1
+	target = -1
+	counter = 1
+	list = {}
 	for line in file:
 		words = line.split()
 		if words[0] == "id":
-			G.add_node (words[1])
+			G.add_node (counter)
+			list[words[1]] = counter
+			counter = counter + 1
 		if words[0] == "source":
-			source = words[1]
-			target = ""
-		if words[0] == "target" and source != "":
-			target = words[1]
+			source = list[words[1]]
+			target = -1
+		if words[0] == "target" and source != -1:
+			target = list[words[1]]
 			G.add_edge(source, target)
-			source = ""
-			target = ""
+			source = -1
+			target = -1
 	file.close()
 
  G.write (outputfile)

@@ -32,8 +32,8 @@ while len(shell) > 0:
 # we should append you to the community, and get your neighbors for further processing.
 		to_append_to_community.append(j)
 		neighbors = G.neighbors(j)
-	else:
-		print "Popped ", j, " which was not supposed to be in the community."
+#	else:
+#		print "Popped ", j, " which was not supposed to be in the community."
 
 # remove community members (and members-to-be) from neighbors.
 
@@ -54,7 +54,7 @@ while len(shell) > 0:
 # may have duplicate entries.
 	for member in external_vertices:
 		if next_shell.count(member) == 0:
-			print "appending ", member
+#			print "appending ", member
 			next_shell.append(member)
 			
 # Append all of the outward facing vertices
@@ -62,9 +62,9 @@ while len(shell) > 0:
 	total_emerging_degree += emerging_degree
 
 	if len(shell) == 0:
-		print depth, " completed."
-		print total_emerging_degree
-		print "next shell is: ",next_shell
+#		print depth, " completed."
+#		print total_emerging_degree
+#		print "next shell is: ",next_shell
 		depth = depth +1
 		shell = next_shell
 		next_shell = []
@@ -102,5 +102,5 @@ while len(shell) > 0:
 
 
 print len (community), " nodes in community, of ", len (G.nodes())
-#print G.subgraph(community)
-print community
+print G.subgraph(community)
+#print community
